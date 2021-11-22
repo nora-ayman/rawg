@@ -1,10 +1,10 @@
-package com.thirdwayv.rawg.features.games
+package com.thirdwayv.rawg.features.favoriteGenres
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GamesViewModel : ViewModel() {
+class FavoriteGenresViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

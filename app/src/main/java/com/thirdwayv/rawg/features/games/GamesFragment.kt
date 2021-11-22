@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.thirdwayv.rawg.databinding.FragmentNotificationsBinding
+import com.thirdwayv.rawg.databinding.FragmentGamesBinding
+import dagger.android.support.DaggerFragment
 
-class NotificationsFragment : Fragment() {
+class GamesFragment : DaggerFragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentNotificationsBinding? = null
+    private lateinit var notificationsViewModel: GamesViewModel
+    private var _binding: FragmentGamesBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,12 +25,12 @@ class NotificationsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         notificationsViewModel =
-                ViewModelProvider(this).get(NotificationsViewModel::class.java)
+                ViewModelProvider(this).get(GamesViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentGamesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
+        val textView: TextView = binding.textDashboard
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })

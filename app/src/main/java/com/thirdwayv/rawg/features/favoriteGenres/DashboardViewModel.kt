@@ -1,4 +1,4 @@
-package com.thirdwayv.rawg.features.dashboard
+package com.thirdwayv.rawg.features.favoriteGenres
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
