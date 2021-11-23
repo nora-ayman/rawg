@@ -39,13 +39,11 @@ class FavoriteGenresViewModel @Inject constructor(private val genresRepository: 
             ) { favorites, allGenres -> Pair(favorites, allGenres) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .doFinally {
-                    isLoading.postValue(false)
-                }
                 .subscribe({
                     count.postValue(it.second.count)
                     it.first?.let { favoriteGenres.postValue(it) }
                     mergeGenres(it.first, it.second.results)
+                    isLoading.postValue(false)
                 }, {
                     Log.e("", "")
                 })

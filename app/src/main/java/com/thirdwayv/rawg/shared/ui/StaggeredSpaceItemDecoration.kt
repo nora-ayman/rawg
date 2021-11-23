@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import java.util.concurrent.ThreadLocalRandom
 
-class StaggeredSpaceItemDecoration constructor(val verticalSpace: Int): RecyclerView.ItemDecoration() {
+class StaggeredSpaceItemDecoration constructor(private val verticalSpace: Int): RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -13,6 +13,10 @@ class StaggeredSpaceItemDecoration constructor(val verticalSpace: Int): Recycler
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.bottom = ThreadLocalRandom.current().nextInt(verticalSpace, verticalSpace * 2)
+        outRect.right = verticalSpace * 2
+        outRect.left = verticalSpace * 2
+        outRect.top = verticalSpace
+        outRect.bottom = ThreadLocalRandom.current().nextInt(verticalSpace * 2, verticalSpace * 4)
+
     }
 }

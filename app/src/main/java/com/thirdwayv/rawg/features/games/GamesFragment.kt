@@ -19,9 +19,7 @@ class GamesFragment : DaggerFragment() {
     lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
     private lateinit var binding: FragmentGamesBinding
-    var pastVisibleItems = 0
-    var visibleItemCount:Int = 0
-    var totalItemCount:Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +38,7 @@ class GamesFragment : DaggerFragment() {
         binding.gamesRv.apply {
             adapter = GamesRecyclerAdapter(binding.viewModel!!.games,
                 WeakReference(viewLifecycleOwner),
-                context
+                requireContext()
             ) {
                 //todo
             }
@@ -48,7 +46,7 @@ class GamesFragment : DaggerFragment() {
             val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
             staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
             layoutManager = staggeredGridLayoutManager
-            addItemDecoration(StaggeredSpaceItemDecoration(4))
+            addItemDecoration(StaggeredSpaceItemDecoration(16))
 
             addOnScrollListener(object : RecyclerView.OnScrollListener()  {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

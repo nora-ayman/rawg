@@ -1,7 +1,13 @@
 package com.thirdwayv.rawg.features
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.view.*
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -22,6 +28,8 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
