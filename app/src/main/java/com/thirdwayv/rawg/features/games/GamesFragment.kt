@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.thirdwayv.rawg.databinding.FragmentGamesBinding
+import com.thirdwayv.rawg.shared.ui.StaggeredSpaceItemDecoration
 import dagger.android.support.DaggerFragment
 import java.lang.ref.WeakReference
 import javax.inject.Inject
@@ -38,26 +39,18 @@ class GamesFragment : DaggerFragment() {
     private fun setupGamesRv() {
         binding.gamesRv.apply {
             adapter = GamesRecyclerAdapter(binding.viewModel!!.games,
-                WeakReference(viewLifecycleOwner)
+                WeakReference(viewLifecycleOwner),
+                context
             ) {
                 //todo
             }
-            layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+
+            val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+            layoutManager = staggeredGridLayoutManager
+            addItemDecoration(StaggeredSpaceItemDecoration(4))
 
             addOnScrollListener(object : RecyclerView.OnScrollListener()  {
-//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-////                    super.onScrolled(recyclerView, dx, dy)
-//                    visibleItemCount = (layoutManager as GridLayoutManager).childCount;
-//                    totalItemCount = (layoutManager as GridLayoutManager).itemCount;
-//                    pastVisibleItems = (layoutManager as GridLayoutManager).findFirstVisibleItemPosition();
-//
-//                    if ((visibleItemCount + pastVisibleItems) >= totalItemCount &&
-//                        totalItemCount < binding.viewModel!!.count.value!!)
-//                        binding.viewModel!!.loadGames()
-//                    else
-//                        recyclerView.removeOnScrollListener(this)
-//                }
-
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if (!recyclerView.canScrollVertically(1))

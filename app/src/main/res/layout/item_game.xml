@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         tools:context=".features.games.GamesFragment"
         android:background="@drawable/bg_rounded_filled_primary"
-        android:layout_margin="@dimen/horizontal_margin"
-        android:paddingBottom="@dimen/vertical_margin">
+        android:layout_margin="@dimen/horizontal_margin">
 
         <ImageView
             android:id="@+id/thumbnail_iv"
@@ -22,8 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/title_tv"
-            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintHeight_percent="0.55"
             android:background="@drawable/bg_rounded_top"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
@@ -37,7 +35,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/rating_tv"
-            app:layout_constraintVertical_chainStyle="spread_inside"
             android:layout_margin="@dimen/horizontal_margin"
             android:text="@{ viewModel.name }"
             android:ellipsize="end"
@@ -53,9 +50,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/title_tv"
             app:layout_constraintStart_toStartOf="@id/title_tv"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:padding="@dimen/horizontal_margin_medium"
-            android:layout_marginTop="@dimen/vertical_margin_small"
+            android:layout_marginTop="@dimen/vertical_margin_medium"
             android:background="@drawable/bg_rounded_small"
             android:drawableEnd="@drawable/ic_rating"
             android:drawablePadding="@dimen/horizontal_margin_small"
@@ -64,6 +60,7 @@
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold"
             android:textColor="@color/colorWarning"
+            android:layout_marginBottom="@dimen/vertical_margin_medium"
             tools:text="4.38"/>
 
 
