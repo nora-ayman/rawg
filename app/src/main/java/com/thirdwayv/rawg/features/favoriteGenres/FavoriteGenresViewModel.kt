@@ -20,6 +20,7 @@ class FavoriteGenresViewModel @Inject constructor(private val genresRepository: 
     var page = Pair(1, 20)
     val count = MutableLiveData(0)
     val compositeDisposable = CompositeDisposable()
+
     init {
         loadGenres()
     }

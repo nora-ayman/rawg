@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bg_rounded.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/bg_rounded_filled_primary.xml" value="0.1005" />
+        <entry key="app/src/main/res/drawable/bg_rounded_primary.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/bg_rounded_small.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/bg_rounded_top.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_favorite_selected.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_favorite_unselected.xml" value="0.1875" />
@@ -12,12 +16,13 @@
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_favorites.xml" value="0.161" />
         <entry key="app/src/main/res/drawable/selector_favorites_black.xml" value="0.1875" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2078125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_favorite_genres.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_games.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/item_game.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_genre.xml" value="0.165" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2078125" />
       </map>

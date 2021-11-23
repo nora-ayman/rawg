@@ -6,6 +6,8 @@ object Constants {
     const val BASE_URL = "https://api.rawg.io/api/"
 
     const val GENRES = "genres"
+    const val GAMES = "games"
+
 
     const val SHARED_PREFERENCES = "THIRDWAYV_RAWG_PREFS"
     const val IS_INITIAL_INSTALLATION = "IS_INITIAL_INSTALLATION"

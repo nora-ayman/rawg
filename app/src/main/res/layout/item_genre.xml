@@ -23,9 +23,9 @@
             app:layout_constraintEnd_toStartOf="@id/title_tv"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintWidth_percent="0.25"
-            android:background="@drawable/bg_rounded"
+            android:background="@drawable/bg_rounded_filled_large"
             android:scaleType="fitXY"
-            app:imageUrl="@{ viewModel.genreResponse.thumbnail }"
+            app:imageUrlRoundedCorners="@{ viewModel.genreResponse.thumbnail }"
             tools:layout_height="100dp"/>
 
         <TextView
