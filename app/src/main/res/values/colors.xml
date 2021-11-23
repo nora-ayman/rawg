@@ -9,4 +9,5 @@
     <color name="colorSecondaryVariantLight">#BDBDBD</color>
     <color name="colorOnSecondary">#757575</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWarning">#ffd740</color>
 </resources>

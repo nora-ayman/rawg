@@ -6,6 +6,7 @@ import com.thirdwayv.rawg.shared.constants.Constants.HEADER_API_KEY
 import com.thirdwayv.rawg.shared.store.api.IRawgService
 import dagger.Module
 import dagger.Provides
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -33,12 +34,14 @@ class NetworkModule {
             .Builder()
             .addInterceptor(
                 Interceptor { chain ->
-                    val builder = chain
-                        .request()
+                    val request = chain.request()
+                    val url = request
+                        .url
                         .newBuilder()
-                        .addHeader(HEADER_API_KEY, API_KEY)
+                        .addQueryParameter(HEADER_API_KEY, API_KEY)
                         .build()
-                    return@Interceptor chain.proceed(builder)
+
+                    return@Interceptor chain.proceed(request.newBuilder().url(url).build())
                 }).build()
 
     @Singleton

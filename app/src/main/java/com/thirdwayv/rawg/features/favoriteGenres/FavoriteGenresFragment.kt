@@ -4,41 +4,56 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thirdwayv.rawg.databinding.FragmentFavoriteGenresBinding
 import dagger.android.support.DaggerFragment
+import java.lang.ref.WeakReference
+import javax.inject.Inject
 
 class FavoriteGenresFragment : DaggerFragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
-    private var _binding: FragmentFavoriteGenresBinding? = null
+    @Inject
+    lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentFavoriteGenresBinding
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
+    ): View {
+        binding = FragmentFavoriteGenresBinding.inflate(inflater, container, false).apply {
 
-        _binding = FragmentFavoriteGenresBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+            this.viewModel = ViewModelProvider(this@FavoriteGenresFragment, viewModelProviderFactory)[FavoriteGenresViewModel::class.java]
+            lifecycleOwner = viewLifecycleOwner
+        }
+        setupGenresRv()
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setupGenresRv() {
+        binding.genresRv.apply {
+            adapter = GenreRecyclerAdapter(binding.viewModel!!.genres,
+                WeakReference(viewLifecycleOwner)) { item ->
+                binding.viewModel!!.updateFavorites(item)
+            }
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+            addOnScrollListener(object : RecyclerView.OnScrollListener()  {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (recyclerView.layoutManager!!.itemCount == (layoutManager as LinearLayoutManager).findLastVisibleItemPosition() + 1 &&
+                            binding.viewModel!!.count.value!! < recyclerView.layoutManager!!.itemCount)
+                                binding.viewModel!!.loadGenres()
+                    else
+                        recyclerView.removeOnScrollListener(this)
+                }
+            })
+        }
     }
+
 }

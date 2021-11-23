@@ -8,7 +8,8 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityBuilder {
-    @ContributesAndroidInjector(modules = [GamesFragmentModule::class,
+    @ContributesAndroidInjector(modules = [
+        GamesFragmentModule::class,
         FavoriteGenresFragmentModule::class])
     abstract fun bindsMainActivity(): MainActivity
 }

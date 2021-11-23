@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.thirdwayv.rawg.features.favoriteGenres.GenreItemViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".features.games.GamesFragment"
+        android:padding="@dimen/horizontal_margin">
+
+        <ImageView
+            android:id="@+id/thumbnail_iv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/title_tv"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.25"
+            android:background="@drawable/bg_rounded"
+            android:scaleType="fitXY"
+            app:imageUrl="@{ viewModel.genreResponse.thumbnail }"
+            tools:layout_height="100dp"/>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/thumbnail_iv"
+            app:layout_constraintStart_toEndOf="@id/thumbnail_iv"
+            app:layout_constraintEnd_toStartOf="@id/favorite_cb"
+            android:padding="@dimen/horizontal_margin_medium"
+            android:layout_marginTop="@dimen/vertical_margin_medium"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:text="@{ viewModel.genreResponse.name }"
+            android:textSize="@dimen/text_size_larger"
+            android:textStyle="bold"
+            tools:text="Action"/>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/favorite_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title_tv"
+            app:layout_constraintTop_toTopOf="@id/title_tv"
+            app:layout_constraintBottom_toBottomOf="@id/title_tv"
+            app:layout_constraintHeight_percent="0.2"
+            android:gravity="end|center_vertical"
+            android:background="@null"
+            android:button="@drawable/selector_favorites"
+            android:checked="@{ viewModel.favorite }"
+            tools:checked="true"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

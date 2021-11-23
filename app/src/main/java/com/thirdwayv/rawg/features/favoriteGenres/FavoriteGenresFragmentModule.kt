@@ -10,7 +10,7 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class FavoriteGenresFragmentModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [])
     abstract fun bindsFragment(): FavoriteGenresFragment
 
     @Binds

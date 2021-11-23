@@ -1,5 +1,6 @@
 package com.thirdwayv.rawg.features
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -8,9 +9,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.thirdwayv.rawg.R
 import com.thirdwayv.rawg.databinding.ActivityMainBinding
+import com.thirdwayv.rawg.shared.constants.Constants
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var binding: ActivityMainBinding
 
@@ -28,6 +34,11 @@ class MainActivity : DaggerAppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_games, R.id.navigation_favorite_genres
         ))
+        if (sharedPreferences.getBoolean(Constants.IS_INITIAL_INSTALLATION, true)) {
+            navController.navigate(R.id.navigation_favorite_genres)
+            sharedPreferences.edit().putBoolean(Constants.IS_INITIAL_INSTALLATION, false).apply()
+        }
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
