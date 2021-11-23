@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.thirdwayv.rawg.R
 import com.thirdwayv.rawg.databinding.FragmentFavoriteGenresBinding
 import dagger.android.support.DaggerFragment
 import java.lang.ref.WeakReference
@@ -41,16 +43,16 @@ class FavoriteGenresFragment : DaggerFragment() {
                 binding.viewModel!!.updateFavorites(item)
             }
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_list_divider_on_secondary)!!)
+            addItemDecoration(dividerItemDecoration)
 
             addOnScrollListener(object : RecyclerView.OnScrollListener()  {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (recyclerView.layoutManager!!.itemCount == (layoutManager as LinearLayoutManager).findLastVisibleItemPosition() + 1 &&
-                            binding.viewModel!!.count.value!! < recyclerView.layoutManager!!.itemCount)
-                                binding.viewModel!!.loadGenres()
-                    else
-                        recyclerView.removeOnScrollListener(this)
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (!recyclerView.canScrollVertically(1) &&
+                        binding.viewModel!!.genres.value.orEmpty().size < binding.viewModel!!.count.value!!)
+                        binding.viewModel!!.loadGenres()
                 }
             })
         }

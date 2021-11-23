@@ -22,8 +22,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.57"
             android:background="@drawable/bg_rounded_top"
-            android:scaleType="fitXY"
             android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             app:imageUrlTopRoundedCorners="@{ viewModel.thumbnail }" />
 
         <TextView

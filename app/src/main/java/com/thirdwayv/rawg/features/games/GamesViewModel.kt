@@ -6,12 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import com.thirdwayv.rawg.shared.BaseViewModel
 import com.thirdwayv.rawg.shared.store.models.response.GameResponse
 import com.thirdwayv.rawg.shared.store.repositories.GamesRepository
+import com.thirdwayv.rawg.shared.store.repositories.GenresRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepository): BaseViewModel() {
+class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepository,
+                                         private val genresRepository: GenresRepository): BaseViewModel() {
 
     val games = MutableLiveData<List<GameResponse>>()
     var page = Pair(1, 20)
@@ -26,7 +28,7 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
         isLoading.postValue(true)
         compositeDisposable.add(
             gamesRepository
-                .getGames(page = page.first, pageSize = page.second)
+                .getGames(page = page.first, pageSize = page.second, genreIds = genresRepository.getFavoriteGenresQueryParam())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

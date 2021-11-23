@@ -22,7 +22,7 @@ fun setImageWithTopRoundedCorners(view: ImageView, url: String?) {
     Glide
         .with(view.context)
         .load(url)
-        .centerInside()
+        .fitCenter()
         .transform(GranularRoundedCorners(18f, 18f, 0f, 0f))
         .into(view)
 

@@ -51,7 +51,8 @@ class GamesFragment : DaggerFragment() {
             addOnScrollListener(object : RecyclerView.OnScrollListener()  {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    if (!recyclerView.canScrollVertically(1))
+                    if (!recyclerView.canScrollVertically(1) &&
+                        binding.viewModel!!.games.value.orEmpty().size < binding.viewModel!!.count.value!!)
                         binding.viewModel!!.loadGames()
                 }
             })

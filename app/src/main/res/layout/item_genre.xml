@@ -41,17 +41,19 @@
             android:text="@{ viewModel.genreResponse.name }"
             android:textSize="@dimen/text_size_larger"
             android:textStyle="bold"
+            android:textColor="@color/colorWhite"
             tools:text="Action"/>
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/favorite_cb"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title_tv"
             app:layout_constraintTop_toTopOf="@id/title_tv"
             app:layout_constraintBottom_toBottomOf="@id/title_tv"
             app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintWidth_percent="0.06"
             android:gravity="end|center_vertical"
             android:background="@null"
             android:button="@drawable/selector_favorites"

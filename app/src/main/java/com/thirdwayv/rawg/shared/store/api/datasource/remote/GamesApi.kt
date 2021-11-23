@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class GamesApi @Inject constructor(val client: IRawgService) {
 
-    fun getGames(page: Int, pageSize: Int) = client.getGames(page, pageSize)
+    fun getGames(page: Int, pageSize: Int, genreIds: String) = client.getGames(page, pageSize, genreIds)
 
 }
