@@ -1,7 +1,6 @@
 package com.thirdwayv.rawg.features.games
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.thirdwayv.rawg.shared.BaseViewModel
 import com.thirdwayv.rawg.shared.store.models.response.GameResponse
@@ -15,7 +14,9 @@ import javax.inject.Inject
 class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepository,
                                          private val genresRepository: GenresRepository): BaseViewModel() {
 
-    val games = MutableLiveData<List<GameResponse>>()
+    val originalGames = MutableLiveData<List<GameResponse>>()
+    val filteredGames = MutableLiveData<List<GameResponse>>()
+    val isSearchApplied = MutableLiveData(false)
     var page = Pair(1, 20)
     val count = MutableLiveData(0)
     val compositeDisposable = CompositeDisposable()
@@ -33,13 +34,25 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     count.postValue(it.count)
-                    games.postValue(it.results)
+                    filteredGames.postValue(it.results)
+                    originalGames.postValue(it.results)
                     isLoading.postValue(false)
                 }, {
                     Log.e("", "")
                 })
 
         )
+    }
+
+    fun searchGenresByName(query: String?) {
+        if (query.isNullOrEmpty()) {
+            filteredGames.value = originalGames.value
+            isSearchApplied.value = false
+        } else {
+            filteredGames.value = originalGames.value.orEmpty()
+                .filter { it.name.lowercase().contains(query.lowercase()) }
+            isSearchApplied.value = true
+        }
     }
 
     override fun onCleared() {

@@ -14,8 +14,6 @@
         android:layout_margin="@dimen/horizontal_margin"
         tools:context=".features.games.GamesFragment"
         android:background="@color/colorBlack">
-
-
         <TextView
             android:id="@+id/title_tv"
             android:layout_width="0dp"
