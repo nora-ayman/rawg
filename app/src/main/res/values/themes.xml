@@ -17,6 +17,7 @@
         <item name="searchViewStyle">@style/SearchViewStyle</item>
 
         <item name="bottomNavigationStyle">@style/BottomNavigationViewStyle</item>
+
         <item name="android:windowFullscreen">true</item>
     </style>
 
