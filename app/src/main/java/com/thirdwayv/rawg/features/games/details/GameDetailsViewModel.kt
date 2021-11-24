@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.thirdwayv.rawg.shared.BaseViewModel
 import com.thirdwayv.rawg.shared.store.models.response.GameDetailsResponse
+import com.thirdwayv.rawg.shared.store.models.response.GameScreenshotResponse
 import com.thirdwayv.rawg.shared.store.models.response.GameTrailerResponse
 import com.thirdwayv.rawg.shared.store.repositories.GamesRepository
 import io.reactivex.Observable
@@ -17,6 +18,7 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
     val compositeDisposable = CompositeDisposable()
     val gameDetails = MutableLiveData<GameDetailsResponse>()
     val trailer = MutableLiveData<GameTrailerResponse.Base?>()
+    val screenshots = MutableLiveData<List<GameScreenshotResponse>>()
     val isVideoPlaying = MutableLiveData(false)
 
     var gameId: Int? = null
@@ -37,8 +39,12 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
                 gamesRepository
                     .getGameTrailers(gameId!!)
                     .toObservable()
+                    .subscribeOn(Schedulers.io()),
+                gamesRepository
+                    .getGameScreenshots(gameId!!)
+                    .toObservable()
                     .subscribeOn(Schedulers.io())
-            ) { details, trailer -> Pair(details, trailer ) }
+            ) { details, trailer, screenshots -> Triple(details, trailer, screenshots) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doFinally {
@@ -47,6 +53,7 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
                 .subscribe({
                     gameDetails.postValue(it.first!!)
                     trailer.postValue(it.second?.results?.firstOrNull())
+                    screenshots.postValue(it.third.results)
                 }, {
                     Log.e("", "")
                 })

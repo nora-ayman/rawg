@@ -1,16 +1,18 @@
 package com.thirdwayv.rawg.features.games.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.thirdwayv.rawg.databinding.FragmentGameDetailsBinding
 import com.thirdwayv.rawg.shared.constants.Constants
 import dagger.android.support.DaggerFragment
+import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 class GameDetailsFragment : DaggerFragment() {
@@ -46,7 +48,18 @@ class GameDetailsFragment : DaggerFragment() {
             currentPlayerPosition = savedInstanceState.getInt(Constants.PLAYER_POSITION);
         }
         observeTrailerData()
+        setupScreenshotsRv()
         return binding.root
+    }
+
+    private fun setupScreenshotsRv() {
+        binding.screenshotsRv.apply {
+            adapter = ScreenshotsRecyclerAdapter(binding.viewModel!!.screenshots,
+                WeakReference(viewLifecycleOwner),
+                requireContext()
+            )
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        }
     }
 
     private fun observeTrailerData() {

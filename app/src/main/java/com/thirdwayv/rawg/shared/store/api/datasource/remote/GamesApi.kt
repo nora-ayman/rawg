@@ -11,4 +11,7 @@ class GamesApi @Inject constructor(val client: IRawgService) {
 
     fun getGameTrailers(gameId: Int) = client.getGameTrailers(gameId)
 
+    fun getGameScreenshots(gameId: Int) = client.getGameScreenshots(gameId)
+
+
 }

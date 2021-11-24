@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/item_game.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_game_screenshot.xml" value="0.2907608695652174" />
         <entry key="app/src/main/res/layout/item_genre.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2078125" />
         <entry key="app/src/main/res/menu/top_nav_menu.xml" value="0.3880208333333333" />

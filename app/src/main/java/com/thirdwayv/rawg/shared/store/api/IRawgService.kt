@@ -20,4 +20,7 @@ interface IRawgService {
 
     @GET(Constants.GAME_TRAILERS)
     fun getGameTrailers(@Path("game_id") gameId: Int): Single<ResponseWrapper<GameTrailerResponse.Base>>
+
+    @GET(Constants.GAME_SCREENSHOTS)
+    fun getGameScreenshots(@Path("game_id") gameId: Int): Single<ResponseWrapper<GameScreenshotResponse>>
 }

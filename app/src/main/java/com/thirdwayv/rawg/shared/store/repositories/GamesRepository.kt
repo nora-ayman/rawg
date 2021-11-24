@@ -10,4 +10,7 @@ class GamesRepository @Inject constructor(private val gamesApi: GamesApi) {
     fun getGameDetails(gameId: Int) = gamesApi.getGameDetails(gameId)
 
     fun getGameTrailers(gameId: Int) = gamesApi.getGameTrailers(gameId)
+
+    fun getGameScreenshots(gameId: Int) = gamesApi.getGameScreenshots(gameId)
+
 }
