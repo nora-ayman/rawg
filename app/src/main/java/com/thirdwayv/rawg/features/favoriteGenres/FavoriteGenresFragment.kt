@@ -28,7 +28,6 @@ class FavoriteGenresFragment : DaggerFragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = FragmentFavoriteGenresBinding.inflate(inflater, container, false).apply {
-
             this.viewModel = ViewModelProvider(this@FavoriteGenresFragment, viewModelProviderFactory)[FavoriteGenresViewModel::class.java]
             lifecycleOwner = viewLifecycleOwner
         }

@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.thirdwayv.rawg.R
 import com.thirdwayv.rawg.databinding.FragmentGamesBinding
 import com.thirdwayv.rawg.shared.ui.StaggeredSpaceItemDecoration
+import com.thirdwayv.rawg.shared.utils.DisplayMetricsUtil
 import dagger.android.support.DaggerFragment
 import java.lang.ref.WeakReference
 import javax.inject.Inject
@@ -20,6 +20,9 @@ class GamesFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var displayMetricsUtil: DisplayMetricsUtil
 
     private lateinit var binding: FragmentGamesBinding
 
@@ -43,16 +46,22 @@ class GamesFragment : DaggerFragment() {
         binding.gamesRv.apply {
             adapter = GamesRecyclerAdapter(binding.viewModel!!.filteredGames,
                 WeakReference(viewLifecycleOwner),
-                requireContext()
+                requireContext(),
+                displayMetricsUtil
             ) { view, id ->
                 findNavController().navigate(GamesFragmentDirections.actionGameDetails().setGameId(id))
 
             }
 
-            val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            val staggeredGridLayoutManager = StaggeredGridLayoutManager(
+                if(displayMetricsUtil.isScreenWidthCompact())
+                    2
+                else
+                    3,
+                StaggeredGridLayoutManager.VERTICAL)
             staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
             layoutManager = staggeredGridLayoutManager
-            addItemDecoration(StaggeredSpaceItemDecoration(16))
+            addItemDecoration(StaggeredSpaceItemDecoration())
 
             addOnScrollListener(object : RecyclerView.OnScrollListener()  {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -83,12 +92,10 @@ class GamesFragment : DaggerFragment() {
                 binding.viewModel?.searchGenresByName(query)
                 return true
             }
-
             override fun onQueryTextChange(query: String?): Boolean {
                 binding.viewModel?.searchGenresByName(query)
                 return true
             }
-
         })
     }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.thirdwayv.rawg.databinding.ItemGameBinding
 import com.thirdwayv.rawg.features.favoriteGenres.GenreRecyclerAdapter
 import com.thirdwayv.rawg.shared.store.models.response.GameResponse
+import com.thirdwayv.rawg.shared.utils.DisplayMetricsUtil
 import java.lang.ref.WeakReference
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.random.Random
@@ -19,6 +20,7 @@ import kotlin.random.Random
 class GamesRecyclerAdapter constructor(val items: MutableLiveData<List<GameResponse>>,
                                        lifeCycleOwner: WeakReference<LifecycleOwner>,
                                        val context: Context,
+                                       val displayMetricsUtil: DisplayMetricsUtil,
                                        val onItemClicked: (View, Int) -> Unit
 
 ): RecyclerView.Adapter<GamesRecyclerAdapter.ViewHolder>() {
@@ -41,8 +43,7 @@ class GamesRecyclerAdapter constructor(val items: MutableLiveData<List<GameRespo
     }
 
     private fun setItemSize(viewGroup: ViewGroup, holder: ViewHolder) {
-        val displayHeight = context.resources.displayMetrics.heightPixels
-        val randomHeight = ThreadLocalRandom.current().nextInt(displayHeight / 3, displayHeight / 2)
+        val randomHeight = displayMetricsUtil.getRandomHeight()
         holder.itemView.layoutParams.height = randomHeight
         viewGroup.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
             holder.itemView.layoutParams.height = randomHeight

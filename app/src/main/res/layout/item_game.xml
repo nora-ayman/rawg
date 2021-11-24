@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".features.games.GamesFragment"
-        android:background="@drawable/bg_rounded_filled_primary">
+        android:background="@drawable/bg_filled_rounded_primary">
 
         <ImageView
             android:id="@+id/thumbnail_iv"

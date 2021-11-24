@@ -65,7 +65,7 @@ class MainActivity : DaggerAppCompatActivity() {
         return super.onSupportNavigateUp()
 
     }
-    fun hideBars() {
+    private fun hideBars() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.decorView.windowInsetsController?.hide(
                 android.view.WindowInsets.Type.statusBars() or
