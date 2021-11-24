@@ -55,7 +55,7 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
                     trailer.postValue(it.second?.results?.firstOrNull())
                     screenshots.postValue(it.third.results)
                 }, {
-                    Log.e("", "")
+                    loadDetails()
                 })
         )
     }

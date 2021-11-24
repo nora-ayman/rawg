@@ -1,6 +1,5 @@
 package com.thirdwayv.rawg.features.games
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.thirdwayv.rawg.shared.BaseViewModel
 import com.thirdwayv.rawg.shared.store.models.response.GameResponse
@@ -23,6 +22,10 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
     val compositeDisposable = CompositeDisposable()
 
     init {
+        originalGames.observeForever {
+            page = Pair(it.orEmpty().size + 1, 20)
+            filteredGames.postValue(it.orEmpty())
+        }
         loadFavoriteGenres()
         loadGames()
     }
@@ -43,11 +46,10 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     count.postValue(it.count)
-                    filteredGames.postValue(it.results)
-                    originalGames.postValue(it.results)
+                    originalGames.postValue(originalGames.value.orEmpty().plus(it.results))
                     isLoading.postValue(false)
                 }, {
-                    Log.e("", "")
+                    loadGames()
                 })
 
         )

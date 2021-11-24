@@ -1,17 +1,15 @@
 package com.thirdwayv.rawg.features.favoriteGenres
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import com.thirdwayv.rawg.shared.BaseViewModel
 import com.thirdwayv.rawg.shared.store.models.objectbox.GenreModel
 import com.thirdwayv.rawg.shared.store.models.response.GenreResponse
 import com.thirdwayv.rawg.shared.store.repositories.GenresRepository
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 
 class FavoriteGenresViewModel @Inject constructor(private val genresRepository: GenresRepository): BaseViewModel() {
