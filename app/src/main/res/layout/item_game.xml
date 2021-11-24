@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/title_tv"
             app:layout_constraintStart_toStartOf="@id/title_tv"
-            android:padding="@dimen/horizontal_margin_medium"
+            android:padding="@dimen/horizontal_margin_small"
             android:layout_marginTop="@dimen/vertical_margin_medium"
             android:background="@drawable/bg_rounded_small"
             android:drawableEnd="@drawable/ic_rating"
