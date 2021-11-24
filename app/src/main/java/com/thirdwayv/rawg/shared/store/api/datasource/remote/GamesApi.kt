@@ -9,6 +9,6 @@ class GamesApi @Inject constructor(val client: IRawgService) {
 
     fun getGameDetails(gameId: Int) = client.getGameDetails(gameId)
 
-    fun getGameTrailers(gameId: Int) = client.getGameTrailers(gameId).map { it.results.first() }
+    fun getGameTrailers(gameId: Int) = client.getGameTrailers(gameId)
 
 }

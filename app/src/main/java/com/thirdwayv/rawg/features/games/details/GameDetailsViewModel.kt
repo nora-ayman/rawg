@@ -27,7 +27,7 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
     private fun loadDetails() {
         isLoading.postValue(true)
         compositeDisposable.add(
-            Observable.zip(
+            Observable.combineLatest(
                 gamesRepository
                     .getGameDetails(gameId!!)
                     .subscribeOn(Schedulers.io())
@@ -44,9 +44,9 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
                 }
                 .subscribe({
                     gameDetails.postValue(it.first!!)
-                    trailer.postValue(it.second)
+                    trailer.postValue(it.second?.results?.firstOrNull())
                 }, {
-                    //todo
+                    Log.e("", "")
                 })
         )
     }

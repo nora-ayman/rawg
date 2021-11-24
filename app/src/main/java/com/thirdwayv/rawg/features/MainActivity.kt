@@ -7,8 +7,10 @@ import android.view.View
 import android.view.Window
 import androidx.core.view.WindowCompat
 import androidx.core.view.setPadding
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,6 +51,8 @@ class MainActivity : DaggerAppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+
     }
 
     override fun onResume() {
@@ -56,6 +60,11 @@ class MainActivity : DaggerAppCompatActivity() {
         hideBars()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return super.onSupportNavigateUp()
+
+    }
     fun hideBars() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.decorView.windowInsetsController?.hide(

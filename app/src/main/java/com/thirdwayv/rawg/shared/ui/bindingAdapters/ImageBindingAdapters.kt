@@ -27,3 +27,12 @@ fun setImageWithTopRoundedCorners(view: ImageView, url: String?) {
         .into(view)
 
 }
+
+@BindingAdapter("imageUrl")
+fun setImage(view: ImageView, url: String?) {
+    Glide
+        .with(view.context)
+        .load(url)
+        .into(view)
+
+}

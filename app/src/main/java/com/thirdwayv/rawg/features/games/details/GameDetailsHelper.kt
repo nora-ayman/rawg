@@ -15,19 +15,19 @@ class GameDetailsHelper @Inject constructor(val context: Context) {
     fun getReleaseDate(date: Date?): SpannableStringBuilder? {
         if (date == null)
             return SpannableStringBuilder().append("N/A")
-        val formattedDate = SimpleDateFormat("DDD dd, YYYY").format(date)
+        val formattedDate = SimpleDateFormat("EEEE dd, YYYY").format(date)
         val spannableStringBuilder = SpannableStringBuilder()
-            .append(context.resources.getString(R.string.release_date_header))
+            .append(context.resources.getString(R.string.release_date_header) + ": ")
             .append(formattedDate)
 
         spannableStringBuilder.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.colorOnSecondary)),
             0,
             context.resources.getString(R.string.release_date_header).length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
         spannableStringBuilder.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.colorWhite)),
-            context.resources.getString(R.string.release_date_header).length + 1,
-            formattedDate.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            context.resources.getString(R.string.release_date_header).length + 2,
+            context.resources.getString(R.string.release_date_header).length + formattedDate.length + 2,
+            Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
         return spannableStringBuilder
     }
 }

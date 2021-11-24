@@ -5,8 +5,9 @@ import java.util.*
 
 data class GameDetailsResponse (val id: Int = 0,
                                 val name: String = "",
+                                val rating: Double,
+                                val released: Date?,
                                 @SerializedName("background_image")
                                 val thumbnail: String? = null,
-                                val rating: Double,
-                                val description: String,
-                                val released: Date?)
+                                @SerializedName("description_raw")
+                                val description: String,)
