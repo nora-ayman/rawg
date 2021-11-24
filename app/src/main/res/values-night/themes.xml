@@ -14,10 +14,18 @@
         <!-- Customize your theme here. -->
         <item name="android:listDivider">@drawable/ic_list_divider_on_secondary</item>
         <item name="searchViewStyle">@style/SearchViewStyle</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationViewStyle</item>
+
     </style>
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <!-- Search button icon -->
         <item name="searchIcon">@drawable/ic_search_icon_white</item>
+    </style>
+
+    <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:background">@color/colorOnPrimary</item>
+        <item name="itemTextColor">@color/selector_bottom_navigation</item>
+        <item name="itemIconTint">@color/selector_bottom_navigation</item>
     </style>
 </resources>

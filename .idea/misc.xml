@@ -12,7 +12,11 @@
         <entry key="app/src/main/res/drawable/ic_favorite_selected.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_favorite_unselected.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_favorites_black.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/ic_favorites_primary_variant_light.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_favorites_secondary_variant_light.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_favorites_selected.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/ic_games_black.xml" value="0.144" />
+        <entry key="app/src/main/res/drawable/ic_games_primary_variant_light.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_list_divider.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_rating.xml" value="0.1" />
@@ -20,6 +24,7 @@
         <entry key="app/src/main/res/drawable/ic_search_icon_white.xml" value="0.193" />
         <entry key="app/src/main/res/drawable/selector_favorites.xml" value="0.161" />
         <entry key="app/src/main/res/drawable/selector_favorites_black.xml" value="0.1875" />
+        <entry key="app/src/main/res/drawable/selector_games.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_favorite_genres.xml" value="0.1" />

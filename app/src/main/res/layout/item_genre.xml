@@ -56,7 +56,7 @@
             app:layout_constraintWidth_percent="0.06"
             android:gravity="end|center_vertical"
             android:background="@null"
-            android:button="@drawable/selector_favorites"
+            android:button="@drawable/selector_favorite"
             android:checked="@{ viewModel.favorite }"
             tools:checked="true"/>
 

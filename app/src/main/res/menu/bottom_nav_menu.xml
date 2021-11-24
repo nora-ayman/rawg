@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_games"
-        android:icon="@drawable/ic_games_black"
+        android:icon="@drawable/ic_games_primary_variant_light"
         android:title="@string/title_games" />
 
     <item
         android:id="@+id/navigation_favorite_genres"
-        android:icon="@drawable/ic_favorite_selected"
+        android:icon="@drawable/ic_favorites_primary_variant_light"
         android:title="@string/title_favorite_genres" />
 
 </menu>
