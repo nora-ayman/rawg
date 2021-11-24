@@ -25,6 +25,7 @@
             android:text="@string/selected_games_description"
             android:textSize="@dimen/text_size_largest"
             android:textColor="@color/colorWhite"
+            android:visibility="@{ viewModel.favoriteGenres.empty ? View.GONE : View.VISIBLE}"
             tools:text="Action"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/vertical_margin"/>
+
+        <TextView
+            android:id="@+id/empty_tv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="@dimen/horizontal_margin"
+            android:text="@string/no_genres_selected"
+            android:textSize="@dimen/text_size_largest"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:visibility="@{ viewModel.favoriteGenres.empty ? View.VISIBLE : View.GONE}"
+            tools:text="Action"/>
 
         <ProgressBar
             android:id="@+id/progress_bar"

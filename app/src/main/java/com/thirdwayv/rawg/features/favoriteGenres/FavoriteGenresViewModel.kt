@@ -2,6 +2,7 @@ package com.thirdwayv.rawg.features.favoriteGenres
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import com.thirdwayv.rawg.shared.BaseViewModel
 import com.thirdwayv.rawg.shared.store.models.objectbox.GenreModel
 import com.thirdwayv.rawg.shared.store.models.response.GenreResponse
@@ -28,7 +29,7 @@ class FavoriteGenresViewModel @Inject constructor(private val genresRepository: 
     fun loadGenres() {
         isLoading.postValue(true)
         compositeDisposable.add(
-            Observable.zip(
+            Observable.combineLatest(
                 genresRepository
                     .getFavoriteGenres()
                     .subscribeOn(Schedulers.io()),
@@ -39,21 +40,36 @@ class FavoriteGenresViewModel @Inject constructor(private val genresRepository: 
             ) { favorites, allGenres -> Pair(favorites, allGenres) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
+                .doFinally {
+                    isLoading.postValue(false)
+                }
                 .subscribe({
                     count.postValue(it.second.count)
                     it.first?.let { favoriteGenres.postValue(it) }
                     mergeGenres(it.first, it.second.results)
-                    isLoading.postValue(false)
                 }, {
-                    Log.e("", "")
+                    mergeGenres(genresRepository.getLocalFavoriteGenres(), emptyList())
                 })
         )
     }
 
     private fun mergeGenres(favorites: List<GenreModel>, allGenres: List<GenreResponse>) {
         genres.value = genres.value.orEmpty().plus(allGenres.map {
-            GenreItemViewModel(genreResponse = it, isFavorite = favorites.any { favorite -> favorite.serverId == it.id })
+            GenreItemViewModel(
+                genreResponse = it,
+                isFavorite = favorites.any { favorite -> favorite.serverId == it.id }
+            )
         })
+        if (genres.value.orEmpty().isEmpty())
+            genres.value = favorites.map {
+                GenreItemViewModel(
+                    genreResponse = GenreResponse(
+                        id = it.serverId,
+                        name = it.name,
+                        thumbnail = it.thumbnail
+                    ),
+                    isFavorite = true
+            )}
         page = Pair(genres.value.orEmpty().size + 1, 20)
     }
 

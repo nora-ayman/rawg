@@ -27,7 +27,11 @@ class GenresRepository @Inject constructor(private val genresApi: GenresApi,
         return Observable.just(genresDao.getAll())
     }
 
-    fun getFavoriteGenresQueryParam(): String {
-        return genresDao.getAll().map { it.serverId.toString() }.joinToString { it }
+    fun getFavoriteGenresQueryServerIds(): List<String> {
+        return genresDao.getAll().map { it.serverId.toString() }
+    }
+
+    fun getLocalFavoriteGenres(): List<GenreModel> {
+        return genresDao.getAll()
     }
 }

@@ -4,5 +4,6 @@
     <string name="title_favorite_genres">Genres</string>
     <string name="selected_games_description">Games based on your favorite genres</string>
     <string name="search_hint">Search</string>
+    <string name="no_genres_selected">You haven\'t added any genres to favorites yet.</string>
 
 </resources>

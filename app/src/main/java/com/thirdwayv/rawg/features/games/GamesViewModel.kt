@@ -16,20 +16,29 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
 
     val originalGames = MutableLiveData<List<GameResponse>>()
     val filteredGames = MutableLiveData<List<GameResponse>>()
+    val favoriteGenres = MutableLiveData<List<String>>()
     val isSearchApplied = MutableLiveData(false)
     var page = Pair(1, 20)
     val count = MutableLiveData(0)
     val compositeDisposable = CompositeDisposable()
 
     init {
+        loadFavoriteGenres()
         loadGames()
+    }
+
+    fun loadFavoriteGenres() {
+        favoriteGenres.value = genresRepository.getFavoriteGenresQueryServerIds()
     }
 
     fun loadGames() {
         isLoading.postValue(true)
         compositeDisposable.add(
             gamesRepository
-                .getGames(page = page.first, pageSize = page.second, genreIds = genresRepository.getFavoriteGenresQueryParam())
+                .getGames(
+                    page = page.first,
+                    pageSize = page.second,
+                    genreIds = favoriteGenres.value.orEmpty().joinToString { it })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
