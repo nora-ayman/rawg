@@ -19,5 +19,5 @@ interface IRawgService {
     fun getGameDetails(@Path("game_id") gameId: Int): Single<GameDetailsResponse>
 
     @GET(Constants.GAME_TRAILERS)
-    fun getGameTrailers(@Path("game_id") gameId: Int): Single<ResponseWrapper<GameTrailerResponse>>
+    fun getGameTrailers(@Path("game_id") gameId: Int): Single<ResponseWrapper<GameTrailerResponse.Base>>
 }

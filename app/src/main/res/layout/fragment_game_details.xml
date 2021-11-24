@@ -43,7 +43,7 @@
                     android:background="@drawable/bg_filled_on_secondary"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
-                    app:imageUrl="@{ viewModel.gameDetails.thumbnail }" />
+                    app:imageUrl="@{ viewModel.trailer.preview ?? viewModel.gameDetails.thumbnail }" />
 
                 <TextView
                     android:id="@+id/title_tv"

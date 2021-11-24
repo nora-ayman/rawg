@@ -16,7 +16,7 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
 
     val compositeDisposable = CompositeDisposable()
     val gameDetails = MutableLiveData<GameDetailsResponse>()
-    val trailer = MutableLiveData<GameTrailerResponse?>()
+    val trailer = MutableLiveData<GameTrailerResponse.Base?>()
     var gameId: Int? = null
     set(value) {
         field = value
