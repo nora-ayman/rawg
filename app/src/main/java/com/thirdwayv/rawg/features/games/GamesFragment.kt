@@ -15,7 +15,6 @@ import dagger.android.support.DaggerFragment
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-
 class GamesFragment : DaggerFragment() {
 
     @Inject
