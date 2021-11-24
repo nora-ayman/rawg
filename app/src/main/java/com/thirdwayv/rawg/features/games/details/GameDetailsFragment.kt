@@ -74,13 +74,10 @@ class GameDetailsFragment : DaggerFragment() {
                     seekTo(100, true)
                 requestFocus()
                 it.start()
-                Log.d("setOnPreparedListener", "lala")
-
             }
 
             setOnCompletionListener {
                 seekTo(0, false)
-                Log.d("setOnCompletionListener", "lala")
             }
 
             setOnErrorListener { _, _, _ ->
