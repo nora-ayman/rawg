@@ -11,7 +11,7 @@ class DisplayMetricsUtil @Inject constructor(val context: Context) {
 
     fun getRandomHeight(): Int {
         val displayHeight = context.resources.displayMetrics.heightPixels
-        val factor = if(isScreenHeightCompact()) 250 else 350
+        val factor = if(isScreenHeightCompact()) 200 else 350
         return ThreadLocalRandom.current()
             .nextInt((displayHeight - factor) / 3, (displayHeight - factor) / 2)
     }
