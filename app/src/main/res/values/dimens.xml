@@ -8,6 +8,8 @@
     <dimen name="vertical_margin">16dp</dimen>
     <dimen name="vertical_margin_medium">8dp</dimen>
     <dimen name="vertical_margin_small">4dp</dimen>
+    <dimen name="vertical_margin_large">24dp</dimen>
+
 
 
     <dimen name="corner_large">18dp</dimen>

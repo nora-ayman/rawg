@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.thirdwayv.rawg.R
@@ -42,8 +44,9 @@ class GamesFragment : DaggerFragment() {
             adapter = GamesRecyclerAdapter(binding.viewModel!!.filteredGames,
                 WeakReference(viewLifecycleOwner),
                 requireContext()
-            ) {
-                //todo
+            ) { view, id ->
+                findNavController().navigate(GamesFragmentDirections.actionGameDetails().setGameId(id))
+
             }
 
             val staggeredGridLayoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)

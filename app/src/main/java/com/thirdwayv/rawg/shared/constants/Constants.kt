@@ -7,7 +7,8 @@ object Constants {
 
     const val GENRES = "genres"
     const val GAMES = "games"
-
+    const val GAME_DETAILS = "${GAMES}/{game_id}"
+    const val GAME_TRAILERS = "${GAME_DETAILS}/movies"
 
     const val SHARED_PREFERENCES = "THIRDWAYV_RAWG_PREFS"
     const val IS_INITIAL_INSTALLATION = "IS_INITIAL_INSTALLATION"

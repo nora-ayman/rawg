@@ -3,6 +3,7 @@ package com.thirdwayv.rawg.features.games
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +19,8 @@ import kotlin.random.Random
 class GamesRecyclerAdapter constructor(val items: MutableLiveData<List<GameResponse>>,
                                        lifeCycleOwner: WeakReference<LifecycleOwner>,
                                        val context: Context,
-                                       val onItemClicked: (GameResponse) -> Unit
+                                       val onItemClicked: (View, Int) -> Unit
+
 ): RecyclerView.Adapter<GamesRecyclerAdapter.ViewHolder>() {
 
 
@@ -56,7 +58,7 @@ class GamesRecyclerAdapter constructor(val items: MutableLiveData<List<GameRespo
         fun bind(item: GameResponse) {
             binding.viewModel = item
             binding.root.setOnClickListener {
-                onItemClicked.invoke(item)
+                onItemClicked.invoke(it, item.id)
             }
         }
     }

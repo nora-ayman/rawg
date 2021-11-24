@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.thirdwayv.rawg.features.games.details.GameDetailsViewModel" />
+
+        <variable
+            name="helper"
+            type="com.thirdwayv.rawg.features.games.details.GameDetailsHelper" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".features.games.details.GameDetailsFragment"
+        android:background="@color/colorBlack">
+
+
+        <VideoView
+            android:id="@+id/video_vv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.57"
+            android:background="@drawable/bg_rounded_top"/>
+
+        <ImageView
+            android:id="@+id/thumbnail_iv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.57"
+            android:background="@drawable/bg_rounded_top"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:imageUrlTopRoundedCorners="@{ viewModel.gameDetails.thumbnail }" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail_iv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rating_tv"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintWidth_percent="0.75"
+            android:layout_marginTop="@dimen/vertical_margin_large"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginBottom="@dimen/horizontal_margin"
+            android:text="@{ viewModel.gameDetails.name }"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="@dimen/text_size_larger"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            tools:text="Action"/>
+
+        <TextView
+            android:id="@+id/rating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/title_tv"
+            app:layout_constraintBottom_toBottomOf="@id/title_tv"
+            app:layout_constraintStart_toEndOf="@id/title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="@dimen/horizontal_margin_medium"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:background="@drawable/bg_rounded_small"
+            android:drawableEnd="@drawable/ic_rating"
+            android:drawablePadding="@dimen/horizontal_margin_small"
+            android:gravity="center"
+            android:text="@{ `` + viewModel.gameDetails.rating }"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/colorWarning"
+            android:layout_marginBottom="@dimen/vertical_margin_medium"
+            tools:text="4.38"/>
+
+        <TextView
+            android:id="@+id/released_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title_tv"
+            app:layout_constraintStart_toStartOf="@id/title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/vertical_margin_small"
+            android:text="@{ helper.getReleaseDate(viewModel.gameDetails.released) }"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:gravity="start"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryVariantLight"
+            tools:text="Action bla bla bla."/>
+
+        <TextView
+            android:id="@+id/description_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/released_tv"
+            app:layout_constraintStart_toStartOf="@id/title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:text="@{ viewModel.gameDetails.description }"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:gravity="start"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryVariantLight"
+            tools:text="Action bla bla bla."/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

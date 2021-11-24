@@ -3,17 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_games">
-
-    <fragment
-        android:id="@+id/navigation_games"
-        android:name="com.thirdwayv.rawg.features.games.GamesFragment"
-        android:label="@string/title_games"
-        tools:layout="@layout/fragment_games" />
+    app:startDestination="@+id/navigation_games"
+    >
 
     <fragment
         android:id="@+id/navigation_favorite_genres"
         android:name="com.thirdwayv.rawg.features.favoriteGenres.FavoriteGenresFragment"
         android:label="@string/title_favorite_genres"
-        tools:layout="@layout/fragment_favorite_genres" />
+        tools:layout="@layout/fragment_favorite_genres">
+    </fragment>
+
+
+        <fragment
+            android:id="@+id/navigation_games"
+            android:name="com.thirdwayv.rawg.features.games.GamesFragment"
+            android:label="@string/title_games"
+            app:defaultNavHost="true"
+            tools:layout="@layout/fragment_games">
+            <action
+                android:id="@+id/action_game_details"
+                app:destination="@id/navigation_game_details"/>
+        </fragment>
+
+
+        <fragment
+            android:id="@+id/navigation_game_details"
+            android:name="com.thirdwayv.rawg.features.games.details.GameDetailsFragment"
+            android:label="@string/title_game_details"
+            tools:layout="@layout/fragment_game_details">
+            <argument
+                android:name="gameId"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </fragment>
 </navigation>
