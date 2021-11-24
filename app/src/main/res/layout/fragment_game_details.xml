@@ -138,6 +138,23 @@
                     android:textSize="@dimen/text_size_larger"
                     android:textColor="@color/colorSecondaryVariantLight"
                     tools:text="Action bla bla bla."/>
+
+                <TextView
+                    android:id="@+id/state_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@{ viewModel.exception != null ? viewModel.exception.displayName : ``}"
+                    android:textSize="@dimen/text_size_largest"
+                    android:textColor="@color/colorPrimaryVariantLight"
+                    android:background="@color/colorBlack"
+                    android:gravity="center"
+                    android:visibility="@{ viewModel.exception != null? View.VISIBLE : View.GONE, default=gone}"
+                    tools:text="Action"/>
+
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     android:layout_width="0dp"

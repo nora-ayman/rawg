@@ -23,7 +23,7 @@ class GamesFragment : DaggerFragment() {
     @Inject
     lateinit var displayMetricsUtil: DisplayMetricsUtil
 
-    private lateinit var binding: FragmentGamesBinding
+    lateinit var binding: FragmentGamesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

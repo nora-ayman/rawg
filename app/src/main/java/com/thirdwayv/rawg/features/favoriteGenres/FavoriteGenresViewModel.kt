@@ -46,7 +46,9 @@ class FavoriteGenresViewModel @Inject constructor(private val genresRepository: 
                     it.first?.let { favoriteGenres.postValue(it) }
                     mergeGenres(it.first, it.second.results)
                 }, {
-                    mergeGenres(genresRepository.getLocalFavoriteGenres(), emptyList())
+                    handleError(it) {
+                        mergeGenres(genresRepository.getLocalFavoriteGenres(), emptyList())
+                    }
                 })
         )
     }

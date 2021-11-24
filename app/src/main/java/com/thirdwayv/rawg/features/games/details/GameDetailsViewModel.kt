@@ -16,7 +16,7 @@ import javax.inject.Inject
 class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesRepository): BaseViewModel() {
 
     val compositeDisposable = CompositeDisposable()
-    val gameDetails = MutableLiveData<GameDetailsResponse>()
+    val gameDetails = MutableLiveData<GameDetailsResponse?>()
     val trailer = MutableLiveData<GameTrailerResponse.Base?>()
     val screenshots = MutableLiveData<List<GameScreenshotResponse>>()
     val isVideoPlaying = MutableLiveData(false)
@@ -55,12 +55,20 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
                     trailer.postValue(it.second?.results?.firstOrNull())
                     screenshots.postValue(it.third.results)
                 }, {
-                    loadDetails()
+                    handleError(it) {
+                        if (it)
+                            loadDetails()
+                    }
                 })
         )
     }
 
     fun setTrailerVideoStatus(isPlaying: Boolean) {
         isVideoPlaying.postValue(isPlaying)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 }

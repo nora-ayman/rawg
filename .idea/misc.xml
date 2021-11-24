@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/drawable/selector_favorites_black.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/selector_games.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_base_dagger.xml" value="0.2907608695652174" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_favorite_genres.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_game_details.xml" value="0.1" />

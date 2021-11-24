@@ -13,8 +13,8 @@ import javax.inject.Inject
 class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepository,
                                          private val genresRepository: GenresRepository): BaseViewModel() {
 
-    val originalGames = MutableLiveData<List<GameResponse>>()
-    val filteredGames = MutableLiveData<List<GameResponse>>()
+    val originalGames = MutableLiveData<List<GameResponse>>(emptyList())
+    val filteredGames = MutableLiveData<List<GameResponse>>(emptyList())
     val favoriteGenres = MutableLiveData<List<String>>()
     val isSearchApplied = MutableLiveData(false)
     var page = Pair(1, 20)
@@ -44,12 +44,18 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
                     genreIds = favoriteGenres.value.orEmpty().joinToString { it })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doFinally {
+                    isLoading.postValue(false)
+                }
                 .subscribe({
                     count.postValue(it.count)
                     originalGames.postValue(originalGames.value.orEmpty().plus(it.results))
                     isLoading.postValue(false)
                 }, {
-                    loadGames()
+                    handleError(it) {
+                        if (it)
+                            loadGames()
+                    }
                 })
 
         )

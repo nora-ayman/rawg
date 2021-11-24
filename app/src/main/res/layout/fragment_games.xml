@@ -37,7 +37,7 @@
             android:layout_marginTop="@dimen/vertical_margin"/>
 
         <TextView
-            android:id="@+id/empty_tv"
+            android:id="@+id/no_genres_tv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,11 +49,11 @@
             android:textSize="@dimen/text_size_largest"
             android:textColor="@color/colorWhite"
             android:gravity="center"
-            android:visibility="@{ viewModel.favoriteGenres.empty ? View.VISIBLE : View.GONE}"
+            android:visibility="@{ viewModel.favoriteGenres.empty &amp;&amp; viewModel.exception == null ? View.VISIBLE : View.GONE}"
             tools:text="Action"/>
 
         <TextView
-            android:id="@+id/no_result_tv"
+            android:id="@+id/state_tv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,11 +61,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="@dimen/horizontal_margin"
-            android:text="@string/no_results"
+            android:text="@{ viewModel.exception != null ? viewModel.exception.displayName : @string/no_results}"
             android:textSize="@dimen/text_size_largest"
             android:textColor="@color/colorPrimaryVariantLight"
             android:gravity="center"
-            android:visibility="@{ viewModel.filteredGames.empty &amp;&amp; viewModel.originalGames.size > 0 ? View.VISIBLE : View.GONE}"
+            android:visibility="@{ viewModel.filteredGames.empty &amp;&amp; viewModel.originalGames.size > 0 || (viewModel.exception != null &amp;&amp; viewModel.originalGames.size == 0) ? View.VISIBLE : View.GONE, default=gone}"
             tools:text="Action"/>
 
         <ProgressBar
