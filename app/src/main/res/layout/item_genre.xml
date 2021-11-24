@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".features.games.GamesFragment"
-        android:padding="@dimen/horizontal_margin">
+        android:paddingEnd="@dimen/horizontal_margin_small"
+        android:layout_marginTop="@dimen/vertical_margin"
+        android:layout_marginBottom="@dimen/vertical_margin"
+        android:background="@drawable/bg_filled_rounded_primary">
 
         <ImageView
             android:id="@+id/thumbnail_iv"
@@ -20,12 +23,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/title_tv"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintDimensionRatio="1:1"
             android:background="@drawable/bg_filled_rounded_large_on_secondary"
             android:scaleType="fitXY"
-            app:imageUrlRoundedCorners="@{ viewModel.genreResponse.thumbnail }"
+            app:imageUrlStartRoundedCorners="@{ viewModel.genreResponse.thumbnail }"
             tools:layout_height="100dp"/>
 
         <TextView
@@ -37,9 +40,10 @@
             app:layout_constraintEnd_toStartOf="@id/favorite_cb"
             android:padding="@dimen/horizontal_margin_medium"
             android:layout_marginTop="@dimen/vertical_margin_medium"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:layout_marginStart="@dimen/horizontal_margin_small"
+            android:gravity="start"
             android:text="@{ viewModel.genreResponse.name }"
-            android:textSize="@dimen/text_size_larger"
+            android:textSize="@dimen/text_size_largest"
             android:textStyle="bold"
             android:textColor="@color/colorWhite"
             tools:text="Action"/>
@@ -52,7 +56,6 @@
             app:layout_constraintStart_toEndOf="@id/title_tv"
             app:layout_constraintTop_toTopOf="@id/title_tv"
             app:layout_constraintBottom_toBottomOf="@id/title_tv"
-            app:layout_constraintHeight_percent="0.2"
             app:layout_constraintWidth_percent="0.06"
             android:gravity="end|center_vertical"
             android:background="@null"
