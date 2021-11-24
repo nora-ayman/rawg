@@ -23,6 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/bg_rounded_filled_large_on_secondary"
             android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="1:1"
             app:imageUrlRoundedCorners="@{ viewModel.thumbnail }"
             tools:layout_height="100dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

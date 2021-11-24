@@ -13,8 +13,8 @@ class StaggeredSpaceItemDecoration constructor(private val verticalSpace: Int): 
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.right = verticalSpace * 2
-        outRect.left = verticalSpace * 2
+        outRect.right = verticalSpace
+        outRect.left = verticalSpace
         outRect.top = verticalSpace
         outRect.bottom = ThreadLocalRandom.current().nextInt(verticalSpace * 2, verticalSpace * 4)
 

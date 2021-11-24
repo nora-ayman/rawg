@@ -31,8 +31,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.4"
-                    app:layout_constraintVertical_bias="1">
+                    app:layout_constraintHeight_percent="0.3">
                     <VideoView
                         android:id="@+id/video_vv"
                         android:layout_width="0dp"
@@ -51,7 +50,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.4"
+                    app:layout_constraintHeight_percent="0.3"
                     android:background="@drawable/bg_filled_on_secondary"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
@@ -65,7 +64,7 @@
                     app:layout_constraintTop_toBottomOf="@id/thumbnail_iv"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.15"
+                    app:layout_constraintHeight_percent="0.1"
                     android:layout_marginTop="@dimen/vertical_margin_medium"/>
 
                 <TextView
@@ -139,6 +138,15 @@
                     android:textSize="@dimen/text_size_larger"
                     android:textColor="@color/colorSecondaryVariantLight"
                     tools:text="Action bla bla bla."/>
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:visibility="@{ viewModel.isLoading ? View.VISIBLE : View.GONE}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
