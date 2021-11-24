@@ -1,8 +1,12 @@
 package com.thirdwayv.rawg.features
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.Window
+import androidx.core.view.WindowCompat
+import androidx.core.view.setPadding
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -23,7 +27,8 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        WindowCompat.setDecorFitsSystemWindows(this.window, false)
+        observeSystemUiVisibility()
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -44,6 +49,34 @@ class MainActivity : DaggerAppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideBars()
+    }
+
+    fun hideBars() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.decorView.windowInsetsController?.hide(
+                android.view.WindowInsets.Type.statusBars() or
+                        android.view.WindowInsets.Type.navigationBars() or
+                        android.view.WindowInsets.Type.systemBars()
+            )
+        } else {
+            val decorView = window.decorView;
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN or
+                    View.SYSTEM_UI_FLAG_FULLSCREEN or
+                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+        }
+    }
+
+    fun observeSystemUiVisibility() {
+        View.OnApplyWindowInsetsListener { view, insets ->
+            view.setPadding(0)
+            hideBars()
+            insets
+        }
     }
 
 }

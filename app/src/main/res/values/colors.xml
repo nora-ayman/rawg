@@ -11,5 +11,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWarning">#ffd740</color>
     <color name="colorBlack">#000000</color>
-
+    <color name="colorBottomNav">#3c3c3c</color>
 </resources>
