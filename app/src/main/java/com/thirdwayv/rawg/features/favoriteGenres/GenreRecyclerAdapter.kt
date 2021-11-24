@@ -27,21 +27,13 @@ class GenreRecyclerAdapter constructor(val items: MutableLiveData<List<GenreItem
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemGenreBinding.inflate(layoutInflater, parent, false)
-        val holder = ViewHolder(binding)
-        setItemSize(parent, holder)
-        return holder
+        return ViewHolder(binding)
     }
 
-    private fun setItemSize(viewGroup: ViewGroup, holder: GenreRecyclerAdapter.ViewHolder) {
-        holder.itemView.layoutParams.height = viewGroup.height / 5
-        viewGroup.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
-            holder.itemView.layoutParams.height = viewGroup.height / 5
-            holder.itemView.requestLayout()
-        }
-    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(items.value!![position])
 
@@ -50,7 +42,6 @@ class GenreRecyclerAdapter constructor(val items: MutableLiveData<List<GenreItem
     inner class ViewHolder(private val binding: ItemGenreBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GenreItemViewModel) {
             binding.viewModel = item
-//            binding.favoriteCb.setOnCheckedChangeListener(null)
             binding.favoriteCb.setOnClickListener {
                 item.favorite = !item.favorite
                 onFavoriteCheckChanged.invoke(item)

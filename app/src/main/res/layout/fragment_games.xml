@@ -65,7 +65,7 @@
             android:textSize="@dimen/text_size_largest"
             android:textColor="@color/colorPrimaryVariantLight"
             android:gravity="center"
-            android:visibility="@{ viewModel.filteredGames.empty ? View.VISIBLE : View.GONE}"
+            android:visibility="@{ viewModel.filteredGames.empty &amp;&amp; viewModel.originalGames.size > 0 ? View.VISIBLE : View.GONE}"
             tools:text="Action"/>
 
         <ProgressBar

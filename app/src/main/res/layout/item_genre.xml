@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".features.games.GamesFragment"
-        android:paddingEnd="@dimen/horizontal_margin_small"
+        android:paddingEnd="@dimen/horizontal_margin"
         android:layout_marginTop="@dimen/vertical_margin"
         android:layout_marginBottom="@dimen/vertical_margin"
         android:background="@drawable/bg_filled_rounded_primary">
@@ -26,7 +26,6 @@
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintDimensionRatio="1:1"
-            android:background="@drawable/bg_filled_rounded_large_on_secondary"
             android:scaleType="fitXY"
             app:imageUrlStartRoundedCorners="@{ viewModel.genreResponse.thumbnail }"
             tools:layout_height="100dp"/>
@@ -38,14 +37,14 @@
             app:layout_constraintTop_toTopOf="@id/thumbnail_iv"
             app:layout_constraintStart_toEndOf="@id/thumbnail_iv"
             app:layout_constraintEnd_toStartOf="@id/favorite_cb"
-            android:padding="@dimen/horizontal_margin_medium"
-            android:layout_marginTop="@dimen/vertical_margin_medium"
-            android:layout_marginStart="@dimen/horizontal_margin_small"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:layout_marginStart="@dimen/horizontal_margin_medium"
             android:gravity="start"
             android:text="@{ viewModel.genreResponse.name }"
             android:textSize="@dimen/text_size_largest"
             android:textStyle="bold"
             android:textColor="@color/colorWhite"
+            android:minHeight="70dp"
             tools:text="Action"/>
 
         <androidx.appcompat.widget.AppCompatCheckBox
@@ -55,8 +54,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title_tv"
             app:layout_constraintTop_toTopOf="@id/title_tv"
-            app:layout_constraintBottom_toBottomOf="@id/title_tv"
             app:layout_constraintWidth_percent="0.06"
+            app:layout_constraintHeight_percent="0.3"
+            android:layout_marginEnd="@dimen/horizontal_margin_medium"
             android:gravity="end|center_vertical"
             android:background="@null"
             android:button="@drawable/selector_favorite"

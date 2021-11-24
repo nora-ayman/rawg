@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_list_divider.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_list_divider_on_secondary.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_rating.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_search_icon_variant_light.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_search_icon_white.xml" value="0.193" />
