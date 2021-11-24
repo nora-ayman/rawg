@@ -12,4 +12,7 @@ object Constants {
 
     const val SHARED_PREFERENCES = "THIRDWAYV_RAWG_PREFS"
     const val IS_INITIAL_INSTALLATION = "IS_INITIAL_INSTALLATION"
+
+    const val PLAYER_POSITION = "genres"
+
 }

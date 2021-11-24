@@ -17,6 +17,8 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
     val compositeDisposable = CompositeDisposable()
     val gameDetails = MutableLiveData<GameDetailsResponse>()
     val trailer = MutableLiveData<GameTrailerResponse.Base?>()
+    val isVideoPlaying = MutableLiveData(false)
+
     var gameId: Int? = null
     set(value) {
         field = value
@@ -49,5 +51,9 @@ class GameDetailsViewModel @Inject constructor(val gamesRepository: GamesReposit
                     Log.e("", "")
                 })
         )
+    }
+
+    fun setTrailerVideoStatus(isPlaying: Boolean) {
+        isVideoPlaying.postValue(isPlaying)
     }
 }
