@@ -19,6 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:context=".features.games.details.GameDetailsFragment"
+                android:paddingBottom="@dimen/vertical_margin_medium"
                 android:background="@color/colorBlack">
 
                 <VideoView
