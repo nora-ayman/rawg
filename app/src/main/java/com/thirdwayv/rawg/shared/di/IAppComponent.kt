@@ -15,6 +15,7 @@ import javax.inject.Singleton
     SharedPreferencesModule::class,
     NetworkModule::class,
     ObjectBoxModule::class,
+    CoroutineDispatcherModule::class,
     ActivityBuilder::class])
 interface IAppComponent: AndroidInjector<Application> {
 

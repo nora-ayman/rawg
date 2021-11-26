@@ -98,6 +98,10 @@ dependencies {
     //Rx
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
+    //Coroutines
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+
+
 
 }
 apply plugin: 'io.objectbox'

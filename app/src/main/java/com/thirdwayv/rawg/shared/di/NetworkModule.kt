@@ -3,6 +3,7 @@ package com.thirdwayv.rawg.shared.di
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.thirdwayv.rawg.shared.constants.Constants.API_KEY
 import com.thirdwayv.rawg.shared.constants.Constants.BASE_URL
 import com.thirdwayv.rawg.shared.constants.Constants.HEADER_API_KEY
@@ -27,7 +28,7 @@ class NetworkModule {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .build()
 
