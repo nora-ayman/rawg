@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.thirdwayv.rawg.shared.store.models.response.GameResponse" />
+            type="com.phoenix.rawg.shared.store.models.response.GameResponse" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,7 +24,7 @@
             android:background="@drawable/bg_rounded_top"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            app:imageUrlTopRoundedCorners="@{ viewModel.thumbnail }" />
+            app:imageUrlOneAndOneCorners="@{ viewModel.thumbnail }" />
 
         <TextView
             android:id="@+id/title_tv"
