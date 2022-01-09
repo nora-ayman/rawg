@@ -4,7 +4,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.thirdwayv.rawg.features.favoriteGenres.FavoriteGenresViewModel" />
+            type="com.phoenix.rawg.features.favoriteGenres.FavoriteGenresViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="@dimen/horizontal_margin"
-            android:text="@{ viewModel.exception != null ? viewModel.exception.displayName : ``}"
+            android:text="@{ viewModel.exception != null &amp;&amp; viewModel.genres.empty? viewModel.exception.displayName : ``}"
             android:textSize="@dimen/text_size_largest"
             android:textColor="@color/colorPrimaryVariantLight"
             android:gravity="center"
