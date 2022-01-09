@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.thirdwayv.rawg.features.favoriteGenres.GenreItemViewModel" />
+            type="com.phoenix.rawg.features.favoriteGenres.GenreItemViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,7 +27,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintDimensionRatio="1:1"
             android:scaleType="fitXY"
-            app:imageUrlStartRoundedCorners="@{ viewModel.genreResponse.thumbnail }"
+            app:imageUrlOneAndOneCorners="@{ viewModel.genreResponse.thumbnail }"
             tools:layout_height="100dp"/>
 
         <TextView

@@ -11,7 +11,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.thirdwayv.rawg"
+        applicationId "com.phoenix.rawg"
         minSdk 24
         targetSdk 30
         versionCode 1

@@ -5,11 +5,11 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.thirdwayv.rawg.features.games.details.GameDetailsViewModel" />
+            type="com.phoenix.rawg.features.games.details.GameDetailsViewModel" />
 
         <variable
             name="helper"
-            type="com.thirdwayv.rawg.features.games.details.GameDetailsHelper" />
+            type="com.phoenix.rawg.features.games.details.GameDetailsHelper" />
     </data>
     <ScrollView
         xmlns:tools="http://schemas.android.com/tools"

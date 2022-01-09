@@ -4,7 +4,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.thirdwayv.rawg.features.games.GamesViewModel" />
+            type="com.phoenix.rawg.features.games.GamesViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
