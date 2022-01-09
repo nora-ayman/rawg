@@ -29,7 +29,7 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
 
     init {
         originalGames.observeForever {
-            page = Pair(it.orEmpty().size + 1, 20)
+            page = Pair((it.orEmpty().size / 20).toInt() + 1, 20)
             filteredGames.postValue(it.orEmpty())
         }
         loadGames()
@@ -58,7 +58,7 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
                                 isLoading.postValue(false)
                             }
                             .collect {
-                                originalGames.postValue(it.results)
+                                originalGames.postValue(originalGames.value.orEmpty().plus(it.results))
                                 count.postValue(it.count)
                             }
                 }
