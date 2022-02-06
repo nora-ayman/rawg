@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.phoenix.rawg.shared.BaseViewModel
 import com.phoenix.rawg.shared.di.IoDispatcher
+import com.phoenix.rawg.shared.network.ResultWrapper
 import com.phoenix.rawg.shared.store.models.objectbox.GenreModel
 import com.phoenix.rawg.shared.store.models.response.GenreResponse
 import com.phoenix.rawg.shared.store.repositories.GenresRepository
@@ -30,28 +31,28 @@ class FavoriteGenresViewModel @Inject constructor(private val genresRepository: 
         viewModelScope.launch {
             isLoading.postValue(true)
 
-            genresRepository.getFavoriteGenres()
-                .catch {
-                    handleError(it) {
-                        loadData()
-                    }
-                }
-                .zip(
-                    genresRepository.getGenres(
-                        page = page.first,
-                        pageSize = page.second
-                    )
-                ) { favoriteGenres, genres ->
+            val genresFavoritesResponse = genresRepository.getFavoriteGenres()
+            val genresResponse = genresRepository.getGenres(
+                page = page.first,
+                pageSize = page.second
+            )
 
-                    return@zip Pair(favoriteGenres, genres.results)
-                }.flowOn(dispatcher)
-                .onCompletion {
+            when(genresResponse) {
+                is ResultWrapper.GenericError -> {
                     isLoading.postValue(false)
                 }
-                .collect {
-                    favoriteGenres.postValue(it.first.orEmpty())
-                    mergeGenres(it.first, it.second)
+                ResultWrapper.NetworkError -> {
+                    isLoading.postValue(false)
+
                 }
+                is ResultWrapper.Success -> {
+                    favoriteGenres.postValue(genresFavoritesResponse.orEmpty())
+                    mergeGenres(genresFavoritesResponse, genresResponse.data.results)
+                }
+            }
+
+        }.invokeOnCompletion {
+            isLoading.postValue(false)
 
         }
     }

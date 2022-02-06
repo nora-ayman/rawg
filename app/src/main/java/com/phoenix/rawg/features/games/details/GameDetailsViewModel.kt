@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.phoenix.rawg.shared.BaseViewModel
 import com.phoenix.rawg.shared.di.IoDispatcher
+import com.phoenix.rawg.shared.network.ResultWrapper
 import com.phoenix.rawg.shared.store.models.response.GameDetailsResponse
 import com.phoenix.rawg.shared.store.models.response.GameScreenshotResponse
 import com.phoenix.rawg.shared.store.models.response.GameTrailerResponse
@@ -32,27 +33,62 @@ class GameDetailsViewModel @Inject constructor(
 
     private fun loadData() {
 
-        viewModelScope.launch {
+        viewModelScope.launch (dispatcher) {
             isLoading.postValue(true)
-                combine(gamesRepository
-                    .getGameDetails(gameId!!),
-                    gamesRepository.getGameTrailers(gameId!!),
-                    gamesRepository.getGameScreenshots(gameId!!)) { details, trailers, screenshots ->
-                    return@combine Triple(details, trailers, screenshots)
-                }.catch {
-                        handleError(it) {
-                            loadData()
-                        }
+
+            try {
+
+                val detailsResponse = gamesRepository
+                    .getGameDetails(gameId!!)
+                val trailersResponse = gamesRepository.getGameTrailers(gameId!!)
+                val screenshotsResponse = gamesRepository.getGameScreenshots(gameId!!)
+
+                when(detailsResponse) {
+                    is ResultWrapper.GenericError -> {
+                        isLoading.postValue(false)
+
                     }
-                    .onCompletion {
+                    ResultWrapper.NetworkError -> {
                         isLoading.postValue(false)
                     }
-                .flowOn(dispatcher)
-                    .collect {
-                        gameDetails.postValue(it.first)
-                        trailer.postValue(it.second?.results?.firstOrNull())
-                        screenshots.postValue(it.third.results)
+                    is ResultWrapper.Success -> {
+                        gameDetails.postValue(detailsResponse.data.results.first())
                     }
+                }
+
+                when (trailersResponse) {
+                    is ResultWrapper.GenericError -> {
+                        isLoading.postValue(false)
+                    }
+                    ResultWrapper.NetworkError -> {
+                        isLoading.postValue(false)
+                    }
+                    is ResultWrapper.Success -> {
+                        trailer.postValue(trailersResponse.data.results.firstOrNull())
+                    }
+                }
+
+                when(screenshotsResponse) {
+                    is ResultWrapper.GenericError -> {
+                        isLoading.postValue(false)
+                    }
+                    ResultWrapper.NetworkError -> {
+                        isLoading.postValue(false)
+
+                    }
+                    is ResultWrapper.Success -> {
+                        screenshots.postValue(screenshotsResponse.data.results)
+                    }
+
+                }
+            } catch (e: Exception) {
+                handleError(e) {
+                    loadData()
+                }
+            }
+
+        }.invokeOnCompletion {
+            isLoading.postValue(false)
 
         }
     }

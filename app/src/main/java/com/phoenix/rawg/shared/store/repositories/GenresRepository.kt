@@ -16,8 +16,7 @@ class GenresRepository @Inject constructor(private val genresApi: GenresApi,
                                            @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
-    suspend fun getGenres(page: Int, pageSize: Int = 20) =
-        flow { emit(genresApi.getGenres(page, pageSize)) }
+    suspend fun getGenres(page: Int, pageSize: Int = 20) = genresApi.getGenres(page, pageSize)
 
     fun addToFavorites(genreResponse: GenreResponse) {
         CoroutineScope(dispatcher).launch {
@@ -39,10 +38,9 @@ class GenresRepository @Inject constructor(private val genresApi: GenresApi,
 
     }
 
-    fun getFavoriteGenres() = flow { emit(genresDao.getAll()) }
+    fun getFavoriteGenres() = genresDao.getAll()
 
 
-    fun getFavoriteGenresQueryServerIds() =
-        flow {  emit( genresDao.getAll().map { it.serverId.toString()}) }
+    fun getFavoriteGenresQueryServerIds() = genresDao.getAll().map { it.serverId.toString()}
 
 }

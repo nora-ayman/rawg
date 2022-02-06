@@ -13,19 +13,15 @@ class GamesRepository @Inject constructor(private val gamesApi: GamesApi,
         page: Int,
         pageSize: Int = 20,
         genreIds: String
-    ) =
-        flow { emit(gamesApi.getGames(page, pageSize, genreIds)) }
+    ) = gamesApi.getGames(page, pageSize, genreIds)
 
 
-    suspend fun getGameDetails(gameId: Int) =
-        flow { emit(gamesApi.getGameDetails(gameId)) }
+    suspend fun getGameDetails(gameId: Int) = gamesApi.getGameDetails(gameId)
 
 
-    suspend fun getGameTrailers(gameId: Int) =
-        flow { emit(gamesApi.getGameTrailers(gameId)) }
+    suspend fun getGameTrailers(gameId: Int) = gamesApi.getGameTrailers(gameId)
 
 
-    suspend fun getGameScreenshots(gameId: Int) =
-        flow { emit(gamesApi.getGameScreenshots(gameId)) }
+    suspend fun getGameScreenshots(gameId: Int) = gamesApi.getGameScreenshots(gameId)
 
 }

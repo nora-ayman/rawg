@@ -4,14 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.phoenix.rawg.shared.BaseViewModel
 import com.phoenix.rawg.shared.di.IoDispatcher
+import com.phoenix.rawg.shared.network.ResultWrapper
 import com.phoenix.rawg.shared.store.models.response.GameResponse
 import com.phoenix.rawg.shared.store.repositories.GamesRepository
 import com.phoenix.rawg.shared.store.repositories.GenresRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,35 +38,31 @@ class GamesViewModel @Inject constructor(private val gamesRepository: GamesRepos
 
     fun loadGames() {
         isLoading.postValue(true)
-        viewModelScope.launch {
+        viewModelScope.launch (dispatcher) {
             isLoading.postValue(true)
-            genresRepository
-                .getFavoriteGenresQueryServerIds()
-                .flowOn(dispatcher)
-                .catch {
-                    handleError(it) {
-                        loadGames()
+            try {
+                val genres = genresRepository.getFavoriteGenresQueryServerIds()
+                val response = gamesRepository.getGames(
+                    page = page.first,
+                    pageSize = page.second,
+                    genreIds = genres.joinToString { it })
 
+                when(response) {
+                    is ResultWrapper.GenericError -> TODO()
+                    ResultWrapper.NetworkError -> TODO()
+                    is ResultWrapper.Success -> {
+                        originalGames.postValue(originalGames.value.orEmpty().plus(response.data.results))
+                        count.postValue(response.data.count)
                     }
                 }
-                .collect {
-                    launch {
-                        gamesRepository.getGames(
-                            page = page.first,
-                            pageSize = page.second,
-                            genreIds = it.joinToString { it })
-                            .onCompletion {
-                                isLoading.postValue(false)
-                            }
-                            .collect {
-                                originalGames.postValue(originalGames.value.orEmpty().plus(it.results))
-                                count.postValue(it.count)
-                            }
+            } catch (e: Exception) {
+                handleError(e) {
+                    loadGames()
                 }
             }
-
+        }.invokeOnCompletion {
+            isLoading.postValue(false)
         }
-
     }
 
     fun searchGenresByName(query: String?) {
