@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GenresRepository @Inject constructor(private val genresApi: GenresApi,
                                            private val genresDao: GenreDao,
@@ -41,6 +42,8 @@ class GenresRepository @Inject constructor(private val genresApi: GenresApi,
     fun getFavoriteGenres() = genresDao.getAll()
 
 
-    fun getFavoriteGenresQueryServerIds() = genresDao.getAll().map { it.serverId.toString()}
+    suspend fun getFavoriteGenresQueryServerIds() = withContext(dispatcher) {
+        genresDao.getAll().map { it.serverId.toString()}
+    }
 
 }
